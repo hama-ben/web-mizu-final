@@ -1,0 +1,159 @@
+# Comprehensive Prompt: Mizu Demo/Landing Site
+
+## Context
+You are a UI/UX designer with 40+ years of experience building landing pages for early-stage tech products. Your task: build a single demo/landing site for **"Mizu"** — an Android app for water delivery in Algeria — whose sole purpose is that any new visitor (customer or prospective driver) understands **in under two minutes** how the app works, without downloading it or actually signing up.
+
+This site is a **demo/showcase only** (no real backend; forms are disabled/non-functional for display purposes). Its goal is to reduce repetitive questions and make it easier to convince people before they register in the actual app.
+
+---
+
+## Design Principles
+
+1. **Clarity before beauty** — every section answers one specific question in the visitor's mind. Never decorate at the expense of understanding.
+2. **Visual honesty** — every mockup mirrors the real app's actual look (same fields, same colors, same labels), so there's no gap between the site and the real app once downloaded.
+3. **Two paths, one story** — the site serves two distinct personas (the customer and the driver), and each must find their path quickly without wading through irrelevant content.
+4. **Authentic RTL, not translated** — the layout is Arabic-native from the ground up (alignment, icon order, arrow direction), not a flipped English design.
+5. **Mobile-first** — most visitors arrive from a WhatsApp/Facebook link on their phone, so design starts at a 375px screen and scales up.
+
+---
+
+## Design System
+
+**Colors:**
+- Base background: `#0a0e1a` (near-black navy)
+- Card background: `#0f1420` to `#131a2b` (subtle gradient)
+- Brand/Primary color: `#0EA5E9` (sky blue — symbolizing water and purity)
+- Success / online / completed: `#22c55e` (green)
+- Warning / break: `#f97316` (orange)
+- Danger / offline / rejected: `#ef4444` (red)
+- Primary text: white `#ffffff` at varying opacity (100%/70%/45%) for hierarchy
+- Glow border: same color as the element at 40–60% opacity + soft `box-shadow` when active
+
+**Typography:**
+- Arabic typeface: Cairo or Tajawal (Bold for headings, Regular for body text)
+- Comfortable line-height (1.6+), since Arabic needs more breathing room than Latin script
+
+**Recurring elements:**
+- Rounded cards (border-radius 16–24px)
+- Thin outline icons — filled only when active
+- Glow effect on active states (same as the "Online" green and "Offline" red seen in the actual app)
+- Smooth scroll-reveal animation (simple fade + slide up, nothing excessive)
+
+**Tech stack:** React + Tailwind CSS, separate components per section, fully responsive, no real backend calls (all interactions are local/mocked for display purposes).
+
+---
+
+## Full Site Structure
+
+### 1. Navbar (sticky top bar)
+- Mizu logo
+- Links: Home / How It Works / For Drivers / For Customers / FAQ
+- Two prominent CTA buttons: **"Sign up as Customer"** and **"Sign up as Driver"** (linking to the real app/registration)
+- Hamburger menu on mobile
+
+### 2. Hero Section
+- Strong headline: "Pure water to your door, at the tap of a button"
+- Two-line description explaining that Mizu connects people who need water with drivers in real time, in an organized way
+- Dual CTA: "Sign up as Customer" (glowing blue) / "Sign up as Driver" (outline)
+- Background: subtle visual effect (water ripples or animated glowing dots, matching the actual app's aesthetic)
+
+### 3. Why Mizu? (Value Props) — icon cards
+- Live GPS tracking
+- Fair daily order cap (the 3-orders-per-day system prevents hoarding and ensures fair distribution among all customers)
+- Instant notifications for drivers on every new order
+- SMS verification for every new account (security for both sides)
+- Coverage by province/wilaya (the driver's "departure wilaya / destination wilaya" system)
+- Direct in-app customer support (the floating "Contact Us" button)
+
+### 4. "How to Register" Section — Interactive Tabs (exactly matching the real registration screen)
+
+A toggle between two modes, using the same design as the original buttons (a card with a glowing blue border when selected):
+
+**a) Customer Registration:**
+Fields (inactive mockup, display only): Full name, email, phone number, password, wilaya selection (geographic location), then an "Send Verification Code" button.
+Under each field, a small line explaining *why* that information is needed (e.g., "Your phone number is used to confirm orders and let the driver reach you").
+
+**b) Driver Registration:**
+Same fields, plus two additional key fields: **"Departure Wilaya"** and **"Destination Wilaya"** (defining the driver's coverage area), then a "Send Verification Code" button.
+Note underneath: "After verification, the Mizu team reviews your application within 24 hours before activation" — this sets the driver's expectation that registration isn't instantly automatic.
+
+### 5. Order Lifecycle (Order Flow) — Synchronized Two-Column Timeline
+
+A visual layout (side-by-side columns on desktop, stacked on mobile) showing the synchronized flow from both sides:
+
+| Customer | Driver |
+|---|---|
+| 1. Opens the app, taps "New Order" | 1. Sets status to "Online" (green) to start receiving orders |
+| 2. Location is auto-detected (GPS) | 2. Receives an instant notification for a nearby order |
+| 3. Selects water size(s) — up to 3 sizes per order | 3. Views order details (quantity, address, price) |
+| 4. Sees total price in Algerian Dinar, taps "Complete Order" | 4. Accepts the order; status changes to "In Delivery" |
+| 5. Tracks order status from the "My Orders" page | 5. Heads to the address, delivers the order |
+| 6. Receives the water, taps "Delivered," rates the driver ⭐ | 6. Order moves into the "Completed" counter on their dashboard |
+
+A connecting arrow or line in glowing blue shows that all of this happens **in real time**.
+
+### 6. Driver Dashboard Preview
+
+An interactive (screenshot-style) mockup explaining, in order:
+
+1. **Quick stats**: 3 cards — Completed (green) / In Delivery (orange) / Total
+2. **Monthly subscription**: remaining time counter (minutes/hours/days) with a progress bar — clarifies that the driver needs an active subscription to work
+3. **Availability status** — the most important feature on the driver dashboard, explained in detail:
+   - 🟢 **Online** — ready to receive new orders instantly
+   - 🟠 **On Break** — choose a duration (15/30/45/60 minutes or custom), a countdown starts automatically
+   - 🔴 **Offline** — out of service, with a clear alert: "Please activate your availability to receive water orders"
+   - Explanatory note: this system gives drivers full flexibility to control their own schedule without a fixed shift
+4. **Available orders**: a real-time updating list, or an empty-state message "No pending orders currently" with a box icon
+5. **Subscription & Payment (manual CCP system)** — numbered steps:
+   1. Transfer the subscription amount via the displayed Algerian postal account (CCP)
+   2. Upload a photo of the transfer receipt (PNG/JPG/JPEG) via drag-and-drop
+   3. Submit the receipt for review with a single button
+   4. Wait for "Approved ✓" (shown with approval date) for the subscription to become active
+   - Reassurance note: "A manual verification system ensures full transparency in every payment"
+6. **Customer support**: a persistent "Contact Us" button at the bottom of the screen, connecting the driver directly to the support team
+
+### 7. Consumer Dashboard Preview
+
+An interactive mockup explaining, in order:
+
+1. **Home screen**: two large glowing cards —
+   - "New Order" (blue) — Order pure drinking water, delivered to you as fast as possible
+   - "My Orders" (green) — Track your past and current orders
+2. **Placing a new order** — step by step:
+   - Auto-detect location (GPS) with a single button
+   - Daily counter: "Orders remaining today: X of 3" (green) — explain to the visitor *why* this cap exists: **fair water distribution among all customers and prevention of hoarding**
+   - Size selection grid (from 5L to 1000L); up to 3 sizes can be selected per order
+   - Total price auto-updates in Algerian Dinar
+   - "Complete Order" button
+3. **Tracking orders ("My Orders")**:
+   - Each past order shows: sizes ordered, total price, date and time
+   - Status: "Delivered ✔" in green
+   - "Rate Delivery ⭐" button to rate the driver experience
+   - The list updates automatically (most recent first)
+4. **Customer support**: the same floating glowing headset button, available on every page
+
+### 8. FAQ
+Suggested questions (collapsible accordion):
+- How does the 3-orders-per-day system work?
+- How long does it take for a driver to arrive after confirming an order?
+- How do I renew my subscription as a driver?
+- Can I change my wilaya after registering?
+- How do I contact support if there's an issue with my order?
+
+### 9. Final Call to Action
+"Ready to try Mizu?" + two clear buttons (Download the App / Contact via WhatsApp) on a distinct background (blue gradient or a subtle water-ripple pattern)
+
+### 10. Footer
+- Mizu logo + short tagline
+- Quick links (mirroring the Navbar links)
+- Social media links
+- Copyright
+
+---
+
+## Final Implementation Notes (from a 40-year expert's perspective)
+
+- **Don't cram everything into one long, breathless page** — give each section adequate whitespace (or rather "black space" here), especially between the Order Flow section and the two dashboard previews, since those are the visually heaviest sections.
+- **Order sections by the decision journey**: first "what you'll gain" (Value Props), then "how to get started" (Registration), then "what you'll actually experience" (the two dashboards), and finally reassurance (FAQ) before the final call to action.
+- **Real icons matter more than decoration** — use the actual icons from the real app (the box, the water drop, the truck, the headset) instead of generic stock icons; this builds instant visual trust once the real app is downloaded.
+- **Test contrast carefully** — since the background is very dark, make sure all text is light gray (not dark gray) and that glowing buttons remain clearly visible even on a small screen under sunlight.

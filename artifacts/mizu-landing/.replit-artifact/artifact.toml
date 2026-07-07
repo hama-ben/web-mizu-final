@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Mizu Landing Site"
+version = "1.0.0"
+id = "artifacts/mizu-landing"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21214
+
+[services.development]
+run = "pnpm --filter @workspace/mizu-landing run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mizu-landing", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/mizu-landing/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21214"
+BASE_PATH = "/"
