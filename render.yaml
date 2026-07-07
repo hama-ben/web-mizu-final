@@ -1,0 +1,40 @@
+databases:
+  - name: mizu-db
+    plan: free
+    databaseName: mizu
+    user: mizu
+
+services:
+  - type: web
+    name: mizu-api-server
+    runtime: node
+    plan: free
+    buildCommand: >-
+      npm install -g pnpm@9 &&
+      pnpm install --frozen-lockfile &&
+      pnpm --filter @workspace/api-server build
+    startCommand: node --enable-source-maps artifacts/api-server/dist/index.mjs
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: info
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mizu-db
+          property: connectionString
+
+  - type: web
+    name: mizu-landing
+    runtime: node
+    plan: free
+    buildCommand: >-
+      npm install -g pnpm@9 &&
+      pnpm install --frozen-lockfile &&
+      PORT=10000 BASE_PATH=/ pnpm --filter @workspace/mizu-landing build
+    startCommand: pnpm --filter @workspace/mizu-landing serve
+    envVars:
+      - key: BASE_PATH
+        value: /
+      - key: NODE_ENV
+        value: production
