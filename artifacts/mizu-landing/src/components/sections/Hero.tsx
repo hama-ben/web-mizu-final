@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowLeft, Download } from 'lucide-react';
+import { ArrowLeft, Download, Droplet } from 'lucide-react';
 import InstallGuide from './InstallGuide';
 
 export default function Hero() {
@@ -40,11 +40,24 @@ export default function Hero() {
             </motion.span>
             <motion.span
               initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.35 }}
-              className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-primary flex-shrink-0"
-              style={{ boxShadow: '0 0 10px rgba(14,165,233,0.8), 0 0 20px rgba(14,165,233,0.4)' }}
-            />
+              animate={{ opacity: 1, scale: [1, 1.15, 1] }}
+              transition={{
+                opacity: { duration: 0.4, ease: "easeOut", delay: 0.35 },
+                scale: {
+                  times: [0, 0.5, 1],
+                  duration: 0.4,
+                  ease: "easeOut",
+                  delay: 0.35,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  repeatDelay: 2.2,
+                },
+              }}
+              className="flex-shrink-0 flex items-center justify-center"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(14,165,233,0.9)) drop-shadow(0 0 18px rgba(14,165,233,0.5))' }}
+            >
+              <Droplet className="w-[0.75em] h-[0.75em] text-primary" strokeWidth={1.5} />
+            </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
