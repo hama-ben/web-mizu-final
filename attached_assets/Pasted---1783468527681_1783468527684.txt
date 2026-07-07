@@ -1,0 +1,75 @@
+انتظر انتظر مالدي غيرته فيه
+
+
+استحضرت تفاصيل التعديلات المجراة بدقة
+استحضرت تفاصيل التعديلات المجراة بدقة
+فقط تغيير واحد بسيط في ملف render.yaml تحديداً (ولم ألمس أي ملف آخر في المشروع). إليك بالضبط ما حذفته:
+
+ما كان موجوداً قبل التعديل
+الملف كان يُعرِّف 3 عناصر:
+
+قاعدة بيانات فارغة اسمها mizu-db
+خدمة باك اند اسمها mizu-api-server (خادم Express كامل مرتبط بقاعدة البيانات تلك)
+خدمة صفحة الهبوط mizu-landing
+ما فعلته
+حذفت العنصرين الأول والثاني فقط (mizu-db وmizu-api-server) لأنهما غير مستخدمين إطلاقاً من صفحة الهبوط — فحصت الكود بنفسي وتأكدت أن صفحة "التسجيل" فيها مجرد تبويبات إرشادية نصية (تشرح خطوات التسجيل)، ولا ترسل أي بيانات لأي خادم، ولا تحتاج أي قاعدة بيانات إطلاقاً. أبقيت العنصر الثالث (mizu-landing) تماماً كما هو دون أي تغيير.
+
+لماذا هذا مهم
+لو رفعت الملف كما كان، كان Render سينشئ لك 3 أشياء بدل واحد: قاعدة بيانات فارغة تماماً لن تُستخدم أبداً، وخادماً كاملاً بلا أي وظيفة حقيقية له هنا — وهذا يستهلك جزءاً من حصتك المجانية المحدودة على Render بلا أي فائدة، وقد يُربكك لاحقاً عند رؤية خدمات لا تعرف الغرض منها.
+
+خلاصة: نفس المشروع بالضبط، فقط بلا الخدمتين الزائدتين. كل شيء آخر (التصميم، رابط تحميل APK، الأقسام، الصور) لم يُمس إطلاقاً.
+
+اعطني خطوات النشر
+
+
+صاغ دليل نشر شامل بخطوات تفصيلية
+صاغ دليل نشر شامل بخطوات تفصيلية
+خطوات نشر صفحة Mizu التعريفية على Render
+1️⃣ ارفع المشروع إلى GitHub (إن لم يكن مرفوعاً بعد)
+إن كان المشروع مرتبطاً بـ GitHub من داخل Replit مسبقاً، فقط ادفع (Push) نسخة الملفات المُصحَّحة (web-mizu-landing-ready.zip الذي أعطيتك إياه) لتحديث المستودع.
+إن لم يكن مرتبطاً بعد: في Replit اذهب لتبويب Git → Connect to GitHub → أنشئ مستودعاً جديداً وارفع الملفات، أو ارفع محتوى الـzip يدوياً إلى مستودع GitHub جديد.
+2️⃣ في لوحة تحكم Render
+اضغط New + (أعلى يمين اللوحة) → اختر Blueprint.
+اربط حساب GitHub الخاص بك إن لم يكن مربوطاً، ثم اختر المستودع الذي رفعت إليه المشروع.
+سيكتشف Render ملف render.yaml تلقائياً ويعرض عليك خدمة واحدة فقط: mizu-landing.
+راجع الإعدادات المعروضة (يجب أن تكون مطابقة لما في الملف: Build Command وStart Command موجودان تلقائياً، لا حاجة لكتابة أي شيء يدوياً).
+اضغط Apply لبدء الإنشاء والنشر.
+3️⃣ انتظر اكتمال البناء
+راقب سجلّ البناء (Logs) — يجب أن ترى:
+
+npm install -g pnpm@9
+pnpm install --frozen-lockfile
+pnpm --filter @workspace/mizu-landing build
+ثم انتقاله لمرحلة Live بعد نجاح البناء وتشغيل pnpm --filter @workspace/mizu-landing serve.
+
+4️⃣ احصل على الرابط النهائي
+بعد اكتمال النشر، سيظهر لك رابط بصيغة:
+
+https://mizu-landing.onrender.com
+(أو اسم مشابه يعتمد على اسم الخدمة — يمكنك تغييره لاحقاً من إعدادات الخدمة إن أردت رابطاً مخصصاً).
+
+5️⃣ اختبار سريع بعد النشر
+افتح الرابط وتأكد أن الصفحة تُحمَّل بشكل صحيح (التصميم، الصور، الأقسام).
+اضغط زر تحميل التطبيق وتأكد أن ملف Mizu.apk يُحمَّل فعلياً.
+جرّب التنقل لأقسام #register-driver و#register-customer من الروابط الداخلية للصفحة.
+تحقق من رابط "افتح التطبيق" في الـNavbar (يوجّه حالياً إلى mizu-uy6c.onrender.com) — تأكد أنه يطابق فعلاً الرابط الحقيقي المنشور لتطبيق Mizu نفسه، وليس رابطاً قديماً/تجريبياً.
+⚠️ ملاحظة على الخطة المجانية في Render: هذه الخدمة ستدخل "وضع سكون" تلقائياً بعد فترة من عدم الاستخدام، وأول زيارة بعد ذلك قد تستغرق نحو 30-50 ثانية لإعادة التشغيل (Cold Start) — هذا طبيعي على الخطة المجانية وليس عطلاً.
+
+اتعرف اعطني برومت لاخبار ريبليت انني سارفع المشروع على راندر و  القيام باتلك التغييرات التي قمت بها بنفسك اخبره ان يقوم بها
+
+
+صاغ تعليمات لوكيل ريبليت بشأن نشر راندر
+صاغ تعليمات لوكيل ريبليت بشأن نشر راندر
+Prompt (English) — paste into the Replit Agent for the web-mizu-final (landing page) project:
+
+I'm about to deploy this project to Render. Before I do, please make one specific fix to render.yaml:
+
+The current render.yaml defines 3 resources: a mizu-db database, a mizu-api-server web service, and the mizu-landing web service. The mizu-db and mizu-api-server entries are leftover/unnecessary — this project's landing page (artifacts/mizu-landing) is a purely static marketing site with zero backend dependency: confirm this yourself by checking that src/components/sections/Registration.tsx contains no fetch/API calls at all — it's just presentational tabs explaining registration steps, linking users out to the real Mizu app to actually register. There is no reason for this project to provision its own database or API server on Render.
+
+Please:
+
+Remove the databases: block (mizu-db) entirely from render.yaml.
+Remove the mizu-api-server service block entirely from render.yaml.
+Keep the mizu-landing service block exactly as-is — do not change its buildCommand, startCommand, or envVars (the PORT=10000 BASE_PATH=/ prefix in the build command is required, not a mistake — vite.config.ts throws an error at config-load time if PORT/BASE_PATH aren't set, even during vite build, so don't remove it).
+After editing, show me the final render.yaml so I can confirm it only defines the single mizu-landing service before I deploy.
+Do a final check: confirm public/downloads/mizu.apk exists and is correctly referenced by the download buttons in Hero.tsx and CTA.tsx, and confirm the "open app" link in Navbar.tsx (currently https://mizu-uy6c.onrender.com) actually points to the real, currently-deployed Mizu app URL — flag it if it looks like a placeholder/outdated link rather than silently leaving it.
