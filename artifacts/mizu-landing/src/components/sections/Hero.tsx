@@ -28,7 +28,7 @@ export default function Hero() {
           متوفر الآن في ولايات مختارة
         </motion.div>
 
-        <h1 className="text-5xl md:text-7xl font-black text-white leading-tight md:leading-tight max-w-4xl mb-6 tracking-tight">
+        <h1 className="text-5xl md:text-7xl font-black text-white leading-tight md:leading-tight max-w-4xl mb-4 tracking-tight">
           {/* Line 1: مياه • نقية */}
           <span className="flex items-center gap-4 md:gap-6 mb-1">
             <motion.span
@@ -78,13 +78,31 @@ export default function Hero() {
           </motion.span>
         </h1>
 
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+          className="text-sm md:text-base font-bold text-primary/80 max-w-2xl mb-6"
+        >
+          ميزو Mizu — توصيل مياه الشرب في الجزائر
+        </motion.p>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+          className="text-xl md:text-2xl font-bold text-white/90 max-w-2xl mb-6 leading-snug"
+        >
+          نوصلك ماء الشعيبة وعدة مناطق أخرى في الجزائر
+        </motion.h2>
+
         <motion.p 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.25 }}
           className="text-hierarchy-2 text-lg md:text-xl font-medium max-w-2xl mb-10 leading-relaxed"
         >
-          Mizu يربط الأشخاص الذين يحتاجون إلى مياه الشرب بالسائقين في الوقت الفعلي، بطريقة منظمة وشفافة.
+          ميزو Mizu يربط الأشخاص الذين يحتاجون إلى مياه الشرب بسائقي التوصيل في الوقت الفعلي، بطريقة منظمة وشفافة. اطلب ماك نتاع شعيبة أو أي منطقة أخرى، وتابع طلبك خطوة بخطوة حتى يصلك إلى باب بيتك. الخدمة متاحة الآن في الجزائر وتغطي منطقة الشعيبة تحديداً، مع خطط للتوسع إلى ولايات إضافية.
         </motion.p>
 
         {/* Primary Download CTA */}

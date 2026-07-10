@@ -1,8 +1,10 @@
 import Navbar from '@/components/sections/Navbar';
 import Hero from '@/components/sections/Hero';
+import HowItWorks from '@/components/sections/HowItWorks';
 import Features from '@/components/sections/Features';
 import Registration from '@/components/sections/Registration';
 import Timeline from '@/components/sections/Timeline';
+import JoinDriver from '@/components/sections/JoinDriver';
 import DriverPreview from '@/components/sections/DriverPreview';
 import CustomerPreview from '@/components/sections/CustomerPreview';
 import FAQ from '@/components/sections/FAQ';
@@ -15,9 +17,11 @@ export default function Home() {
       <Navbar />
       <main className="flex-grow">
         <Hero />
+        <HowItWorks />
         <Features />
         <Registration />
         <Timeline />
+        <JoinDriver />
         <DriverPreview />
         <CustomerPreview />
         <FAQ />
