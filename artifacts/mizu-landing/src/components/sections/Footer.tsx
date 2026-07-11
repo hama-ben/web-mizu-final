@@ -198,6 +198,45 @@ export default function Footer() {
 
           </div>
 
+          {/* Team Credits Strip */}
+          <div className="mb-8 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4 py-5 border-t border-white/5">
+            <p className="text-hierarchy-3 text-sm font-medium">صُنع بكل 💙 من طرف:</p>
+            <div className="flex items-center gap-5">
+              {[
+                { name: 'زراري محمد', role: 'مطور ومصمم', img: '/team/mohamed-zerari.jpg', url: 'https://www.instagram.com/mohamed.twt' },
+                { name: 'محمد بن علاهم', role: 'مساعد ومسؤول الدعم', img: '/team/mohamed-benallaham.jpg', url: 'https://www.instagram.com/mohamm.1.d' },
+              ].map((member) => (
+                <a
+                  key={member.name}
+                  href={member.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center gap-1.5"
+                >
+                  <div className="relative">
+                    {/* Tooltip — desktop only (hidden on touch) */}
+                    <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden md:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
+                      <div className="bg-[#0d1117] border border-primary/30 rounded-lg px-3 py-1.5 whitespace-nowrap text-center shadow-lg shadow-black/50">
+                        <p className="text-white text-xs font-bold">{member.name}</p>
+                        <p className="text-primary/70 text-[11px]">{member.role}</p>
+                      </div>
+                      <div className="w-2 h-2 bg-[#0d1117] border-b border-r border-primary/30 rotate-45 mx-auto -mt-1"></div>
+                    </div>
+                    <img
+                      src={member.img}
+                      alt={member.name}
+                      width={40}
+                      height={40}
+                      className="w-10 h-10 rounded-full object-cover border-2 border-primary/60 shadow-[0_0_10px_rgba(14,165,233,0.35)] group-hover:scale-110 group-hover:border-primary group-hover:shadow-[0_0_16px_rgba(14,165,233,0.6)] transition-all duration-200"
+                    />
+                  </div>
+                  {/* Name — mobile only */}
+                  <span className="md:hidden text-[10px] text-hierarchy-3 font-medium text-center leading-tight max-w-[56px]">{member.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
           <div className="pt-8 border-t border-white/5 text-center flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-hierarchy-3 text-sm">© {currentYear} Mizu. جميع الحقوق محفوظة.</p>
             <div className="flex gap-6 text-sm">
