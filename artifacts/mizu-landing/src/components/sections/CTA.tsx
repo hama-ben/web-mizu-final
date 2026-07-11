@@ -64,7 +64,7 @@ function TeamAvatar({ member }: { member: typeof team[number] }) {
       {/* Always-visible name + role */}
       <div className="text-center mt-1">
         <p className="text-white/85 text-[11.5px] font-bold leading-tight">{member.name}</p>
-        <p className="text-primary/60 text-[10px] font-medium mt-0.5">{member.role}</p>
+        <p className="text-[#38bdf8] text-[10px] font-semibold mt-0.5">{member.role}</p>
       </div>
     </motion.div>
   );
